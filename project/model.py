@@ -36,9 +36,9 @@ class Order(db.Model):
     account_id = Column( Integer , ForeignKey(Account.id) , nullable = False )
     total_money = Column ( Float() , default = 0 , nullable = False)
     Order_details = relationship("Order_details" , backref = "order" , lazy= False)
-    def __init__(self , account_id , total_money ):
+    def __init__(self , account_id ):
         self.account_id = account_id
-        self.total_money = total_money
+        # self.total_money = total_money
 
 class Order_details (db.Model):
     __tablename__= "order_details"

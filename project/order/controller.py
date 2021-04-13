@@ -18,16 +18,19 @@ class buy() :
                 order = Order(current_user.id)
                 db.session.add(order)
                 db.session.commit()
+                total_money = 0
                 for name,quantity in name_quantity.items() :
                     book = Book.query.filter_by(name =name ).first()
-                    details = Order_details(order , book.id , quantity , book.price )
+                    price = book.price
+                    details = Order_details(order , book.id , quantity , price )
                     db.session.add(details)
                     db.session.commit()
-                    total_money += sum(price*quantity)
+                    # new_quantity = float(quantity)
+                    total_money +=  price*quantity
 
                 update = Order.query.filter_by(id = details.order_id ).first()
                 new = Order.query.get(update.id)
-                new.total_money = total_money
+                new.total_money = total_money 
                 db.session.commit()
 
                 return "you have placed your order successfully"

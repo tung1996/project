@@ -6,6 +6,7 @@ from flask_login import LoginManager
 
 from account.route import *
 from book.route import *
+from order.route import *
 
 
 
