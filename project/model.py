@@ -53,6 +53,8 @@ class Order_details (db.Model):
         self.quantity = quantity
         self.into_money = into_money 
 
+
+
 @login.user_loader
 def load_user(id):
     return Account.query.get(int(id))

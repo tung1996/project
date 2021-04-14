@@ -12,9 +12,7 @@ class buy() :
             if current_user.admin == 1 :
                 return "You are the admin so you cannot buy"
             else :
-                name_book = request.args.get("name_book")
                 name_quantity = {"hai so phan":2 , 'nha gia kim' : 1 }
-
                 order = Order(current_user.id)
                 db.session.add(order)
                 db.session.commit()
@@ -25,7 +23,6 @@ class buy() :
                     details = Order_details(order , book.id , quantity , price )
                     db.session.add(details)
                     db.session.commit()
-                    # new_quantity = float(quantity)
                     total_money +=  price*quantity
 
                 update = Order.query.filter_by(id = details.order_id ).first()
@@ -36,5 +33,7 @@ class buy() :
                 return "you have placed your order successfully"
         else :
             return "You need to sign in to your account"
+
+
 
 buy = buy ()
