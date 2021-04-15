@@ -5,7 +5,6 @@ from flask_login import UserMixin
 from sqlalchemy.orm import relationship
 from config import *
 
-
 class Book(db.Model):
     __tablename__= "book"
     id = Column( Integer , primary_key = True , autoincrement = True , nullable = False )
@@ -14,9 +13,6 @@ class Book(db.Model):
     def __init__(self , name, price ):
         self.name = name
         self.price = price
-
-   
-
 class Account(db.Model,UserMixin):
     __tablename__= "account"
     id = Column( Integer , primary_key=True , autoincrement = True , nullable = False )
@@ -29,7 +25,6 @@ class Account(db.Model,UserMixin):
         self.password = password
         self.fullname = fullname
         self.admin = admin
-
 class Order(db.Model):
     __tablename__= "order"
     id = Column( Integer , primary_key=True , autoincrement = True , nullable = False)
@@ -38,8 +33,6 @@ class Order(db.Model):
     Order_details = relationship("Order_details" , backref = "order" , lazy= False)
     def __init__(self , account_id ):
         self.account_id = account_id
-        # self.total_money = total_money
-
 class Order_details (db.Model):
     __tablename__= "order_details"
     id = Column( Integer , primary_key=True , autoincrement = True , nullable = False)
@@ -52,12 +45,8 @@ class Order_details (db.Model):
         self.book_id = book_id
         self.quantity = quantity
         self.into_money = into_money 
-
-
-
 @login.user_loader
 def load_user(id):
     return Account.query.get(int(id))
-
-
+    
 db.create_all()

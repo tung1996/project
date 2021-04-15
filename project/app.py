@@ -8,9 +8,5 @@ from account.route import *
 from book.route import *
 from order.route import *
 
-
-
-
-
 if __name__ == "__main__" :
     app.run()
